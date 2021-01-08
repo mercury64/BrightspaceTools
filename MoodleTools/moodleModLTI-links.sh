@@ -29,6 +29,9 @@ for xml in $files; do
   
   # get the instructorcustomparameters id
   id=$(xml sel -t -v "/activity/lti/instructorcustomparameters" ${xml});
+
+  # force ID to be lowercase
+  id=$(echo ${id} | tr '[:upper:]' '[:lower:]')
  
   # get the toolurl
   toolurl=$(xml sel -t -v "/activity/lti/toolurl" ${xml});
