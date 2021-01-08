@@ -4,6 +4,8 @@
 # Author     : Warren E. White
 # Email      : wwhite@saanichschools.ca
 #
+# GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin20)
+#
 # Copyright 2021 Warren E. White <wwhite@saanichschools.ca>
 #
 # This program is free software: you can redistribute it and/or modify
