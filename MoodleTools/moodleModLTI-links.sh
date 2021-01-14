@@ -25,26 +25,26 @@
 files=$(find . -name 'lti.xml' -type f)                                          
 
 # loop over each lti.xml file
-for xml in $files; do
+for xmlFile in $files; do
   
   # get the instructorcustomparameters id
-  id=$(xml sel -t -v "/activity/lti/instructorcustomparameters" ${xml});
+  id=$(xmlstarlet sel -t -v "/activity/lti/instructorcustomparameters" ${xmlFile});
 
   # force ID to be lowercase
   id=$(echo ${id} | tr '[:upper:]' '[:lower:]')
  
   # get the toolurl
-  toolurl=$(xml sel -t -v "/activity/lti/toolurl" ${xml});
+  toolurl=$(xmlstarlet sel -t -v "/activity/lti/toolurl" ${xmlFile});
   
   # check if type=page
   if [[ "$toolurl" =~ .*"type=page".* ]]; then
     # update page type toolurl with custom_id
-	update=$(xml edit -L --update "/activity/lti/toolurl" --value "https://wcln.ca/local/lti/index.php?type=page&custom_${id}" ${xml});
+	update=$(xmlstarlet edit -L --update "/activity/lti/toolurl" --value "https://wcln.ca/local/lti/index.php?type=page&custom_${id}" ${xmlFile});
 
   # check if type=book
   elif [[ "$toolurl" =~ .*"type=book".* ]]; then
     # update book type toolurl with custom_id
-    update=$(xml edit -L --update "/activity/lti/toolurl" --value "https://wcln.ca/local/lti/index.php?type=book&custom_${id}" ${xml});
+    update=$(xmlstarlet edit -L --update "/activity/lti/toolurl" --value "https://wcln.ca/local/lti/index.php?type=book&custom_${id}" ${xmlFile});
   fi
 
 done;
